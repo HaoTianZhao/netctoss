@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.barista.dao.ServiceMapper" >
+  <resultMap id="BaseResultMap" type="com.barista.entity.Service" >
+    <constructor >
+      <idArg column="service_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="account_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="unix_host" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="os_username" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="login_passwd" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="service_status" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="service_create_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="service_pause_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="service_close_date" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="cost_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    service_id, account_id, unix_host, os_username, login_passwd, service_status, service_create_date, 
+    service_pause_date, service_close_date, cost_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from service
+    where service_id = #{serviceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from service
+    where service_id = #{serviceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.barista.entity.Service" >
+    insert into service (service_id, account_id, unix_host, 
+      os_username, login_passwd, service_status, 
+      service_create_date, service_pause_date, 
+      service_close_date, cost_id)
+    values (#{serviceId,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{unixHost,jdbcType=VARCHAR}, 
+      #{osUsername,jdbcType=VARCHAR}, #{loginPasswd,jdbcType=VARCHAR}, #{serviceStatus,jdbcType=CHAR}, 
+      #{serviceCreateDate,jdbcType=TIMESTAMP}, #{servicePauseDate,jdbcType=TIMESTAMP}, 
+      #{serviceCloseDate,jdbcType=TIMESTAMP}, #{costId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.barista.entity.Service" >
+    insert into service
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceId != null" >
+        service_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="unixHost != null" >
+        unix_host,
+      </if>
+      <if test="osUsername != null" >
+        os_username,
+      </if>
+      <if test="loginPasswd != null" >
+        login_passwd,
+      </if>
+      <if test="serviceStatus != null" >
+        service_status,
+      </if>
+      <if test="serviceCreateDate != null" >
+        service_create_date,
+      </if>
+      <if test="servicePauseDate != null" >
+        service_pause_date,
+      </if>
+      <if test="serviceCloseDate != null" >
+        service_close_date,
+      </if>
+      <if test="costId != null" >
+        cost_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceId != null" >
+        #{serviceId,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="unixHost != null" >
+        #{unixHost,jdbcType=VARCHAR},
+      </if>
+      <if test="osUsername != null" >
+        #{osUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPasswd != null" >
+        #{loginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceStatus != null" >
+        #{serviceStatus,jdbcType=CHAR},
+      </if>
+      <if test="serviceCreateDate != null" >
+        #{serviceCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servicePauseDate != null" >
+        #{servicePauseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceCloseDate != null" >
+        #{serviceCloseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costId != null" >
+        #{costId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.barista.entity.Service" >
+    update service
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="unixHost != null" >
+        unix_host = #{unixHost,jdbcType=VARCHAR},
+      </if>
+      <if test="osUsername != null" >
+        os_username = #{osUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="loginPasswd != null" >
+        login_passwd = #{loginPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceStatus != null" >
+        service_status = #{serviceStatus,jdbcType=CHAR},
+      </if>
+      <if test="serviceCreateDate != null" >
+        service_create_date = #{serviceCreateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="servicePauseDate != null" >
+        service_pause_date = #{servicePauseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceCloseDate != null" >
+        service_close_date = #{serviceCloseDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="costId != null" >
+        cost_id = #{costId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where service_id = #{serviceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.barista.entity.Service" >
+    update service
+    set account_id = #{accountId,jdbcType=INTEGER},
+      unix_host = #{unixHost,jdbcType=VARCHAR},
+      os_username = #{osUsername,jdbcType=VARCHAR},
+      login_passwd = #{loginPasswd,jdbcType=VARCHAR},
+      service_status = #{serviceStatus,jdbcType=CHAR},
+      service_create_date = #{serviceCreateDate,jdbcType=TIMESTAMP},
+      service_pause_date = #{servicePauseDate,jdbcType=TIMESTAMP},
+      service_close_date = #{serviceCloseDate,jdbcType=TIMESTAMP},
+      cost_id = #{costId,jdbcType=INTEGER}
+    where service_id = #{serviceId,jdbcType=INTEGER}
+  </update>
+</mapper>
