@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!-- defaultModelType="flat" 设置复合主键时不单独为主键创建实体 -->
+    <context id="MySql" defaultModelType="flat">
+        <!-- 生成的POJO实现java.io.Serializable接口 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!--注释-->
+        <commentGenerator>
+            <!-- 注释里不添加日期 -->
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+            <!-- 将数据库中表的字段描述信息添加到注释 -->
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库连接 -->
+        <jdbcConnection
+            driverClass="com.mysql.cj.jdbc.Driver"
+            connectionURL="jdbc:mysql://localhost:3306/netctoss?serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8
+&amp;useSSL=false&amp;nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true"
+            userId="root"
+            password="123456"/>
+
+        <!-- 生成POJO对象，并将类放到com.barista.entity包下 -->
+        <javaModelGenerator targetPackage="com.barista.entity"
+                            targetProject="src/main/java">
+            <!-- 是否对model添加 构造函数 -->
+            <property name="constructorBased" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成mapper xml文件，并放到resources下的mapper文件夹下 -->
+        <sqlMapGenerator targetPackage="com.barista.dao.mapper"
+                         targetProject="src/main/java"></sqlMapGenerator>
+
+        <!-- 生成mapper xml对应dao接口，放到com.barista.dao-->
+        <!-- type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+             type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+             type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <javaClientGenerator targetPackage="com.barista.dao" targetProject="src/main/java"
+                             type="XMLMAPPER"></javaClientGenerator>
+
+        <!-- table标签可以有多个，至少一个，tableName指定表名，可以使用_和%通配符 -->
+        <table tableName="account" domainObjectName="Account"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <!--是否只生成POJO对象-->
+            <property name="modelOnly" value="false"/>
+
+            <!--将时间转换为LocalDateTime-->
+            <!--<columnOverride column="birthday" property="birthday"-->
+            <!--typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"-->
+            <!--jdbcType="OTHER" javaType="java.time.LocalDateTime"/>-->
+        </table>
+
+        <!--<table tableName="admin_info" domainObjectName="AdminInfo"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<property name="modelOnly" value="false"/>-->
+        <!--</table>-->
+
+        <!--<table tableName="admin_role" domainObjectName="AdminRole"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<property name="modelOnly" value="false"/>-->
+        <!--</table>-->
+
+        <table tableName="bill" domainObjectName="Bill"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+        <table tableName="bill_item" domainObjectName="BillItem"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+        <table tableName="cost" domainObjectName="Cost"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+        <table tableName="host" domainObjectName="Host"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+        <table tableName="privilege" domainObjectName="Privilege"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+        <!--<table tableName="role" domainObjectName="Role"-->
+               <!--enableCountByExample="false" enableUpdateByExample="false"-->
+               <!--enableDeleteByExample="false"-->
+               <!--enableSelectByExample="false" selectByExampleQueryId="false">-->
+            <!--<property name="modelOnly" value="false"/>-->
+        <!--</table>-->
+
+        <table tableName="role_privilege" domainObjectName="RolePrivilege"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+        <table tableName="service" domainObjectName="Service"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+        <table tableName="service_detail" domainObjectName="ServiceDetail"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+        <table tableName="service_update" domainObjectName="ServiceUpdate"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <property name="modelOnly" value="false"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
