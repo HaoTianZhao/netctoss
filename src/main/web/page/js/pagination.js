@@ -46,7 +46,7 @@
 
             $('#pages a[name]').click(function (e) {
                 global_post(o.url,
-                    JSON.parse((JSON.stringify({ 'currentPage': e.target.name, 'pageSize': o.pageSize }) + g_isNull(ajaxJsonData, "", "ajaxJsonData")).replace(/}{/, ',')),
+                    JSON.parse((JSON.stringify({ 'currentPage': e.target.name, 'pageSize': o.pageSize }) + ajaxJsonData).replace(/}{/, ',')),
                     function (result) {
                         if (result.code == 200) {
                             o.callback(result.data);

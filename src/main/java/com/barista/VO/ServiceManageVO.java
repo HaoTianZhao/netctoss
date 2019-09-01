@@ -5,7 +5,6 @@ import com.barista.entity.Cost;
 import com.barista.entity.Service;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class ServiceManageVO {
     private int totalCount;
-    private List<ServiceColumn> serviceColums;
+    private List<ServiceColumn> serviceColumns;
     private List<Cost> allCost;//所有开通状态的资费
 
     public ServiceManageVO() {
@@ -28,14 +27,14 @@ public class ServiceManageVO {
     public ServiceManageVO(int totalCount, List<Service> services, List<Account> accounts
             , List<Cost> costs, List<Cost> allCost) {
         this.totalCount = totalCount;
-        serviceColums = new ArrayList<>(services.size());
+        serviceColumns = new ArrayList<>(services.size());
         for (int i = 0; i < services.size(); i++) {
             Service service = services.get(i);
             service.setLoginPasswd(null);
             Account account = accounts.get(i);
             account.setAccountLoginPasswd(null);
             Cost cost = costs.get(i);
-            serviceColums.add(new ServiceColumn(service, account, cost));
+            serviceColumns.add(new ServiceColumn(service, account, cost));
         }
         this.allCost = allCost.stream().filter(t -> t.getCostStatus().equals("0")).collect(Collectors.toList());
     }
@@ -87,12 +86,12 @@ public class ServiceManageVO {
         this.totalCount = totalCount;
     }
 
-    public List<ServiceColumn> getServiceColums() {
-        return serviceColums;
+    public List<ServiceColumn> getServiceColumns() {
+        return serviceColumns;
     }
 
-    public void setServiceColums(List<ServiceColumn> serviceColums) {
-        this.serviceColums = serviceColums;
+    public void setServiceColumns(List<ServiceColumn> serviceColumns) {
+        this.serviceColumns = serviceColumns;
     }
 
     public List<Cost> getAllCost() {

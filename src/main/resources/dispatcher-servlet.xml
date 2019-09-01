@@ -92,7 +92,7 @@
             <mvc:exclude-mapping path="/page/login.html"/>
 
             <!--静态资源放行-->
-            <mvc:exclude-mapping path="/favicon.ico "/>
+            <mvc:exclude-mapping path="/favicon.ico"/>
             <mvc:exclude-mapping path="/page/images/**"/>
             <mvc:exclude-mapping path="/page/js/**"/>
             <mvc:exclude-mapping path="/page/styles/**"/>
@@ -116,7 +116,7 @@
             <mvc:exclude-mapping path="/admin/changePassword"/>
 
             <!--静态资源放行-->
-            <mvc:exclude-mapping path="/favicon.ico "/>
+            <mvc:exclude-mapping path="/favicon.ico"/>
             <mvc:exclude-mapping path="/page/component/**"/>
             <mvc:exclude-mapping path="/page/images/**"/>
             <mvc:exclude-mapping path="/page/js/**"/>

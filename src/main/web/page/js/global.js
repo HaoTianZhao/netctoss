@@ -103,7 +103,7 @@ var setCkb = function (name, value) {
     // alert(name + " " + value);
     // $("[name=" + name + "][value=" + value + "]").attr("checked", "checked");
     // 不知为何找不到具体标签;
-    $("[name=" + name + "][val=" + value + "]").attr("checked", "checked");
+    $("[name='" + name + "'][val='" + value + "']").attr("checked", "checked");
 }
 
 var fillckb = function (name, json) {

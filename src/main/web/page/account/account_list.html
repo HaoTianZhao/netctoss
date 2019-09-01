@@ -82,7 +82,7 @@
             function (result) {
                 if (result.code == 200) {
                     $('#datalist').initAccountList(result.data);
-                    $('#pages').pagination('/cost/getPageInfo', $('#datalist').initAccountList, 1, 10, result.data.totalCount);
+                    $('#pages').pagination('/account/getPageInfo', $('#datalist').initAccountList, 1, 10, result.data.totalCount);
                 } else if (result.code == 500) {
                     global_operate_result(false, "服务器故障，无法查看角色信息。");
                 }
@@ -91,7 +91,6 @@
 
     //根据身份证，姓名，登录名，和状态查询
     function selectPage() {
-        console.log($('#select_admin').serialize());
         global_post("/account/getPageInfoSelected",
             {
                 'currentPage': 1, 'nextPage': true, 'pageSize': 10,

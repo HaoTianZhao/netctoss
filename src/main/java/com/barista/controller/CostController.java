@@ -30,6 +30,11 @@ public class CostController {
     @Autowired
     private CostService costService;
 
+    @RequestMapping("/getAllCost")
+    public Result<List<Cost>> getAllCost() {
+        return Result.success(costService.selectByExistField(null));
+    }
+
     @RequestMapping("/getPageInfo")
     public Result getPageInfo(Integer currentPage, Integer pageSize) {
         if (ValueUtil.haveNullOrBlack(currentPage, pageSize)) {

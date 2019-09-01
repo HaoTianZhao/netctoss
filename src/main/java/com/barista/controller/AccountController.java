@@ -35,12 +35,19 @@ public class AccountController {
 
     @RequestMapping("/selectById")
     public Result getAccountInfo(Integer accountId) {
-        if (ValueUtil.haveNullOrBlack(accountId)) {
-            return Result.fail(ResultCode.ILLEGAL_PARAM);
-        }
+//        if (ValueUtil.haveNullOrBlack(accountId)) {
+//            return Result.fail(ResultCode.ILLEGAL_PARAM);
+//        }
         Account account = accountService.selectById(accountId);
-        account.setAccountLoginPasswd(null);
+        if (account != null) {
+            account.setAccountLoginPasswd(null);
+        }
         return Result.success(account);
+    }
+
+    @RequestMapping("/selectByIdcardNo")
+    public Result<Account> selectByIdcardNo(String accountIdcardNo) {
+        return Result.success(accountService.selectByIdcardNo(accountIdcardNo));
     }
 
     @RequestMapping("/getPageInfo")
@@ -95,7 +102,7 @@ public class AccountController {
         }
 
         if (!ValueUtil.haveNullOrBlack(accountRecommenderIdcardNo)) {
-            Account recommendAccount = selectByIdcardNo(accountRecommenderIdcardNo);
+            Account recommendAccount = accountService.selectByIdcardNo(accountRecommenderIdcardNo);
             account.setAccountRecommenderId(recommendAccount.getAccountId());
         }
 
@@ -158,7 +165,7 @@ public class AccountController {
         }
 
         if (!ValueUtil.haveNullOrBlack(accountRecommenderIdcardNo)) {
-            Account recommendAccount = selectByIdcardNo(accountRecommenderIdcardNo);
+            Account recommendAccount = accountService.selectByIdcardNo(accountRecommenderIdcardNo);
             account.setAccountRecommenderId(recommendAccount.getAccountId());
         }
 
@@ -178,10 +185,5 @@ public class AccountController {
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }
-    }
-
-    @RequestMapping("/selectByIdcardNo")
-    public Account selectByIdcardNo(String accountRecommenderIdcardNo) {
-        return accountService.selectByIdcardNo(accountRecommenderIdcardNo);
     }
 }
