@@ -84,13 +84,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public int pauseUsing(Integer accountId) {
-        //todo        serviceMapper.pauseAll(accountId);
+        serviceMapper.pauseAllByAccountId(accountId);
         return accountMapper.pauseUsing(accountId);
     }
 
     @Override
     public int deleteAccount(Integer accountId) {
-        //todo        serviceMapper.deleteByAccountId(accountId);
+        serviceMapper.deleteByAccountId(accountId);
         return accountMapper.deleteByPrimaryKey(accountId);
     }
 

@@ -227,7 +227,6 @@
     <update id="startUsing" parameterType="integer">
         update account
         set account_status      = '0',
-            account_create_date = now(),
             account_pause_date  = null
         where account_id = #{accountId,jdbcType=INTEGER}
           and account_status = '1';

@@ -2,16 +2,29 @@ package com.barista.dao;
 
 import com.barista.entity.ServiceUpdate;
 
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.List;
+
 public interface ServiceUpdateMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(ServiceUpdate record);
+    int updateOrInsertSelective(ServiceUpdate record);
 
-    int insertSelective(ServiceUpdate record);
+    List<ServiceUpdate> selectPaging(@Param("id") Integer id, @Param("pageSize") Integer pageSize, @Param("timePoint") Date timePoint);
 
-    ServiceUpdate selectByPrimaryKey(Integer id);
+    int deleteUsedUpdateInfo(Integer lastId);
 
-    int updateByPrimaryKeySelective(ServiceUpdate record);
 
-    int updateByPrimaryKey(ServiceUpdate record);
+    //    int deleteByPrimaryKey(Integer id);
+    //
+    //    int insert(ServiceUpdate record);
+    //
+    //    int insertSelective(ServiceUpdate record);
+
+    //    ServiceUpdate selectByPrimaryKey(Integer id);
+    //
+    //    int updateByPrimaryKeySelective(ServiceUpdate record);
+    //
+    //    int updateByPrimaryKey(ServiceUpdate record);
 }

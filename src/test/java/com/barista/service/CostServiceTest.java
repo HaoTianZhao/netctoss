@@ -30,6 +30,13 @@ public class CostServiceTest {
     }
 
     @Test
+    public void selectByExistField(){
+        Cost cost = new Cost();
+//        cost.setCostUnitCost(new BigDecimal("0.4"));
+        System.out.println(JSON.toJSONString(costService.selectByExistField(null)));
+    }
+
+    @Test
     public void selectPaging() {
         System.out.println(JSON.toJSONString(costService.selectPaging(1, 10)));
     }

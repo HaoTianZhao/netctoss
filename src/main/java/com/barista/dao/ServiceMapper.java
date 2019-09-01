@@ -2,16 +2,41 @@ package com.barista.dao;
 
 import com.barista.entity.Service;
 
+import org.apache.ibatis.annotations.Param;
+
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
+
 public interface ServiceMapper {
-    int deleteByPrimaryKey(Integer serviceId);
-
-    int insert(Service record);
-
-    int insertSelective(Service record);
-
     Service selectByPrimaryKey(Integer serviceId);
 
-    int updateByPrimaryKeySelective(Service record);
+    List<Service> selectByExistField(Service service);
 
-    int updateByPrimaryKey(Service record);
+    int selectCount();
+
+    List<Service> selectPaging(@Param("begin") Integer begin, @Param("pageSize") Integer pageSize);
+
+    int selectCountFilter(@Param("osUsername") String osUsername, @Param("unixHost") String unixHost
+            , @Param("accountIdcardNo") String accountIdcardNo, @Param("serviceStatus") String serviceStatus);
+
+    List<Service> selectPagingFilter(@Param("begin") Integer begin, @Param("pageSize") Integer pageSize
+            , @Param("osUsername") String osUsername, @Param("unixHost") String unixHost
+            , @Param("accountIdcardNo") String accountIdcardNo, @Param("serviceStatus") String serviceStatus);
+
+    int insertSelective(Service record) throws SQLIntegrityConstraintViolationException;
+
+    int startUsing(Integer serviceId);
+
+    int pauseUsing(Integer serviceId);
+
+    int pauseAllByAccountId(Integer accountId);
+
+    int deleteByPrimaryKey(Integer serviceId);
+
+    int deleteByAccountId(Integer accountId);
+
+    //给定时任务使用。修改资费之后又删除了账号，还插入吗？我觉得不插入
+    int updateAllById(List<Service> serviceList);
+
+    int updateByPrimaryKeySelective(Service record) throws SQLIntegrityConstraintViolationException;
 }

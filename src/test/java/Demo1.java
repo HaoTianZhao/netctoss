@@ -1,7 +1,12 @@
 
 import com.barista.service.AuthorityService;
+import com.barista.service.schedule.ScheduleService;
 import com.barista.util.MD5Util;
 
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,6 +20,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -26,7 +32,7 @@ import java.util.Set;
 @RunWith(SpringRunner.class)
 @ContextConfiguration({"classpath:application.xml"})
 public class Demo1 {
-    static Logger logger = LoggerFactory.getLogger(Demo1.class);
+    private static Logger logger = LoggerFactory.getLogger(Demo1.class);
 
     @Test
     public void test2() {
@@ -71,6 +77,33 @@ public class Demo1 {
         System.out.println(a == b);
 
         List<Integer> list = new ArrayList<>();
+
+    }
+
+    @Autowired
+    ScheduleService scheduleService;
+
+    @Test
+    public void multi() throws InterruptedException {
+
+
+    }
+
+
+
+    //使用mybatis的批量处理
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
+    @Test
+    public void batch(){
+        try (SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH)) {
+            //批量执行dao层SQL操作
+            authorityService.selectAllPermission();
+            authorityService.selectAllPermission();
+            authorityService.selectAllPermission();
+            authorityService.selectAllPermission();
+            sqlSession.commit();
+        }
 
     }
 

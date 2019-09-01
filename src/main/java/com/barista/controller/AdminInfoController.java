@@ -114,7 +114,7 @@ public class AdminInfoController {
 
         List<AdminInfo> adminInfos = adminService.selectPaging(currentPage, pageSize);
         for (AdminInfo adminInfo : adminInfos) {
-            adminInfo.setAdminPassword("");
+            adminInfo.setAdminPassword(null);
             List<Role> roles = adminRoleService.selectRolesByAdminCode(adminInfo.getAdminCode());
             adminManageVO.add(adminInfo, roles.stream().collect(ArrayList::new, (a, b) -> a.add(b.getRoleName()), ArrayList::addAll));
         }
@@ -140,7 +140,7 @@ public class AdminInfoController {
 
         List<AdminInfo> adminInfos = adminRoleService.selectPagingFilter(currentPage, pageSize, privilegeName, roleName);
         for (AdminInfo adminInfo : adminInfos) {
-            adminInfo.setAdminPassword("");
+            adminInfo.setAdminPassword(null);
             List<Role> roles = adminRoleService.selectRolesByAdminCode(adminInfo.getAdminCode());
             adminManageVO.add(adminInfo, roles.stream().collect(ArrayList::new, (a, b) -> a.add(b.getRoleName()), ArrayList::addAll));
         }

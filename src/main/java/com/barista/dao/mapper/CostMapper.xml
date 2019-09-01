@@ -48,7 +48,8 @@
     <!--#{costDescr,jdbcType=VARCHAR}, #{costCreattime,jdbcType=TIMESTAMP}, #{costStarttime,jdbcType=TIMESTAMP}, -->
     <!--#{costType,jdbcType=CHAR})-->
     <!--</insert>-->
-    <insert id="insertSelective" parameterType="com.barista.entity.Cost" keyProperty="cost_id" useGeneratedKeys="true">
+    <insert id="insertSelective" parameterType="com.barista.entity.Cost" keyProperty="cost_id"
+            useGeneratedKeys="true">
         insert into cost
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="costId != null">
@@ -155,6 +156,44 @@
         <include refid="Base_Column_List"/>
         from cost
         where cost_id = #{costId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByExistField" parameterType="Cost" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from cost
+        <where>
+            <if test="costId != null">
+                cost_id = #{costId,jdbcType=INTEGER}
+            </if>
+            <if test="costName != null">
+                and cost_name = #{costName,jdbcType=VARCHAR}
+            </if>
+            <if test="costBaseDuration != null">
+                and cost_base_duration = #{costBaseDuration,jdbcType=INTEGER}
+            </if>
+            <if test="costBaseCost != null">
+                and cost_base_cost = #{costBaseCost,jdbcType=DECIMAL}
+            </if>
+            <if test="costUnitCost != null">
+                and cost_unit_cost = #{costUnitCost,jdbcType=DECIMAL}
+            </if>
+            <if test="costStatus != null">
+                and cost_status = #{costStatus,jdbcType=CHAR}
+            </if>
+            <if test="costDescr != null">
+                and cost_descr = #{costDescr,jdbcType=VARCHAR}
+            </if>
+            <if test="costCreattime != null">
+                 and cost_creattime = #{costCreattime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="costStarttime != null">
+                and cost_starttime = #{costStarttime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="costType != null">
+                and cost_type = #{costType,jdbcType=CHAR}
+            </if>
+        </where>
     </select>
     <!--<update id="updateByPrimaryKey" parameterType="com.barista.entity.Cost" >-->
     <!--update cost-->

@@ -30,7 +30,7 @@ public interface AuthorityService {
     Set<String> selectAllPermission();
 
     /**
-     * 根据管理员账号查找他可以所有权限
+     * 根据管理员账号查找他可以访问的所有权限
      *
      * @param adminCode 管理员账号
      * @return java.util.Set<java.lang.String> 有权限访问的路径

@@ -25,7 +25,7 @@ public class PersonalInfoVO {
         this.adminInfo = adminInfo;
         this.roleNames = roles.stream().map(Role::getRoleName).collect(Collectors.toList());
         this.adminInfo.setAdminId(0);
-        this.adminInfo.setAdminPassword("");
+        this.adminInfo.setAdminPassword(null);
     }
 
     public AdminInfo getAdminInfo() {

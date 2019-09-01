@@ -15,6 +15,8 @@ import java.util.List;
  */
 public interface CostService {
 
+    List<Cost> selectByExistField(Cost cost);
+
     /**
      * 查询资费总数
      */

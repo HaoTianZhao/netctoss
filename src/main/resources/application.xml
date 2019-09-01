@@ -19,8 +19,28 @@
 
 
 
-    <!--<task:annotation-driven />-->
-    <!--<context:component-scan base-package="com.barista.service" />-->
+
+
+
+    <!-- 定时任务，配置需要扫描的包，如果用@EnableScheduling则不要此配置，否则会执行两次 -->
+    <context:component-scan base-package="com.barista.service"
+                            xmlns:context="http://www.springframework.org/schema/context"/>
+    <!-- 用于激活那些已经在spring容器里注册过的bean（无论是通过xml的方式还是通过package scanning的方式）上面的注解 可不配置  -->
+    <context:annotation-config/>
+    <!--  配置处理定时任务的线程池 -->
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <!-- 配置处理 异步定时任务的  线程池 -->
+    <!--
+    　　pool-size:线程池大小   keep-alive:线程最大空闲时间
+    　　queue-capacity:队列大小（无线程可用时，其余任务放置队列中，队列放满后其他任务只能等待）
+    　　rejection-policy:队列任务数达到最大时，处理其他任务的策略
+    -->
+    <task:executor id="taskExecutor" pool-size="10" keep-alive="2000"
+                   rejection-policy="DISCARD_OLDEST" queue-capacity="10"/>
+    <!-- 配置spring定时开关-->
+    <task:annotation-driven executor="taskExecutor" scheduler="scheduler"/>
+
+
 
 
 
@@ -88,6 +108,8 @@
             <tx:method name="find*" read-only="true" isolation="DEFAULT" propagation="REQUIRED"/>
             <tx:method name="select*" read-only="true" isolation="DEFAULT" propagation="REQUIRED"/>
             <tx:method name="check*" read-only="true" isolation="DEFAULT" propagation="REQUIRED"/>
+
+            <tx:method name="*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
 

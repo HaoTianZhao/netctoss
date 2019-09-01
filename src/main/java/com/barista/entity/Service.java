@@ -1,5 +1,7 @@
 package com.barista.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,10 +18,13 @@ public class Service implements Serializable {
 
     private String serviceStatus;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date serviceCreateDate;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date servicePauseDate;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date serviceCloseDate;
 
     private Integer costId;

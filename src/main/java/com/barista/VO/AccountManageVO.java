@@ -19,7 +19,7 @@ public class AccountManageVO {
 
     public AccountManageVO(int totalCount, List<Account> accountColumns) {
         for (Account accountColumn : accountColumns) {
-            accountColumn.setAccountLoginPasswd("");
+            accountColumn.setAccountLoginPasswd(null);
         }
         this.totalCount = totalCount;
         this.accountColumns = accountColumns;

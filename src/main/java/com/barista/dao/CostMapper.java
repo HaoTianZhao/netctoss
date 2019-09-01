@@ -26,6 +26,8 @@ public interface CostMapper {
 
     Cost selectByPrimaryKey(Integer costId);
 
+    List<Cost> selectByExistField(Cost cost);
+
 
     //    int insert(Cost record);
     //    int updateByPrimaryKey(Cost record);

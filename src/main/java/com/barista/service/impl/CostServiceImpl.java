@@ -22,6 +22,11 @@ public class CostServiceImpl implements CostService {
     private CostMapper costMapper;
 
     @Override
+    public List<Cost> selectByExistField(Cost cost) {
+        return costMapper.selectByExistField(cost);
+    }
+
+    @Override
     public Integer selectCount() {
         return costMapper.selectCount();
     }

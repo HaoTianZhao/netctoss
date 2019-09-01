@@ -39,12 +39,8 @@ public class AccountController {
             return Result.fail(ResultCode.ILLEGAL_PARAM);
         }
         Account account = accountService.selectById(accountId);
-        account.setAccountLoginPasswd("");
-
-        if (account != null) {
-            return Result.success(account);
-        }
-        return Result.fail(ResultCode.SERVER_ERROR);
+        account.setAccountLoginPasswd(null);
+        return Result.success(account);
     }
 
     @RequestMapping("/getPageInfo")
@@ -94,11 +90,11 @@ public class AccountController {
             return Result.fail(ResultCode.ILLEGAL_PARAM);
         }
 
-        if(!ValueUtil.haveNullOrBlack(password)){
+        if (!ValueUtil.haveNullOrBlack(password)) {
             account.setAccountLoginPasswd(MD5Util.encode(password));
         }
 
-        if(!ValueUtil.haveNullOrBlack(accountRecommenderIdcardNo)) {
+        if (!ValueUtil.haveNullOrBlack(accountRecommenderIdcardNo)) {
             Account recommendAccount = selectByIdcardNo(accountRecommenderIdcardNo);
             account.setAccountRecommenderId(recommendAccount.getAccountId());
         }
@@ -161,15 +157,17 @@ public class AccountController {
             return Result.fail(ResultCode.ILLEGAL_PARAM);
         }
 
-        if(!ValueUtil.haveNullOrBlack(accountRecommenderIdcardNo)) {
+        if (!ValueUtil.haveNullOrBlack(accountRecommenderIdcardNo)) {
             Account recommendAccount = selectByIdcardNo(accountRecommenderIdcardNo);
             account.setAccountRecommenderId(recommendAccount.getAccountId());
         }
 
-        if(!ValueUtil.haveNullOrBlack(oldPassword, newPassword)){
+        if (!ValueUtil.haveNullOrBlack(oldPassword, newPassword)) {
             Account dbAccount = accountService.selectById(account.getAccountId());
-            if(accountService.checkPassword(oldPassword, dbAccount.getAccountLoginPasswd()));
-                account.setAccountLoginPasswd(MD5Util.encode(newPassword));
+            if (accountService.checkPassword(oldPassword, dbAccount.getAccountLoginPasswd())) {
+                ;
+            }
+            account.setAccountLoginPasswd(MD5Util.encode(newPassword));
         }
 
         int result = accountService.updateAccount(account);
@@ -182,7 +180,8 @@ public class AccountController {
         }
     }
 
-    private Account selectByIdcardNo(String accountRecommenderIdcardNo) {
+    @RequestMapping("/selectByIdcardNo")
+    public Account selectByIdcardNo(String accountRecommenderIdcardNo) {
         return accountService.selectByIdcardNo(accountRecommenderIdcardNo);
     }
 }
