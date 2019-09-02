@@ -4,16 +4,15 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <welcome-file-list>
+        <welcome-file>/login.html</welcome-file>
+    </welcome-file-list>
+
     <!--配置全局参数，让监听器能够识别到spring的配置文件所在-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:application*.xml</param-value>
     </context-param>
-    
-    <welcome-file-list>
-        <welcome-file>/login.html</welcome-file>
-    </welcome-file-list>
-
 
     <!--监听web容器启动就加载ioc容器-->
     <listener>
@@ -38,6 +37,7 @@
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
         </init-param>
+
     </filter>
     <filter-mapping>
         <filter-name>characterEncoding</filter-name>

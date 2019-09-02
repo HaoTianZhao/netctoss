@@ -9,10 +9,15 @@ import com.barista.service.AuthorityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.MethodParameter;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,6 +74,19 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        if (handler instanceof HandlerMethod) {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            Method method = handlerMethod.getMethod();
+            Annotation annotation = handlerMethod.getMethodAnnotation(RequestMapping.class);
+            MethodParameter[] parameters = handlerMethod.getMethodParameters();
+            Class clazz = handlerMethod.getBeanType();
+            Object object = handlerMethod.getBean();
+            Object castObject = clazz.cast(object);
+
+
+        }
         int i = 0;
     }
+
+
 }
