@@ -144,8 +144,6 @@ public class ServiceController {
         int result = serviceService.insertService(service);
         if (result > 0) {
             return Result.success("增加业务账号成功");
-        } else if (result == -1) {
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }

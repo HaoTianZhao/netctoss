@@ -109,8 +109,6 @@ public class AccountController {
         int result = accountService.insertAccount(account);
         if (result > 0) {
             return Result.success("增加账务账号成功");
-        } else if (result == -1) {
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }
@@ -180,8 +178,6 @@ public class AccountController {
         int result = accountService.updateAccount(account);
         if (result > 0) {
             return Result.success("更改账务账号成功");
-        } else if (result == -1) {
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }

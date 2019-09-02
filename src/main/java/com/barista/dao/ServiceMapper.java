@@ -23,7 +23,7 @@ public interface ServiceMapper {
             , @Param("osUsername") String osUsername, @Param("unixHost") String unixHost
             , @Param("accountIdcardNo") String accountIdcardNo, @Param("serviceStatus") String serviceStatus);
 
-    int insertSelective(Service record) throws SQLIntegrityConstraintViolationException;
+    int insertSelective(Service record);
 
     int startUsing(Integer serviceId);
 
@@ -38,5 +38,5 @@ public interface ServiceMapper {
     //给定时任务使用。修改资费之后又删除了账号，还插入吗？我觉得不插入
     int updateAllById(List<Service> serviceList);
 
-    int updateByPrimaryKeySelective(Service record) throws SQLIntegrityConstraintViolationException;
+    int updateByPrimaryKeySelective(Service record) ;
 }

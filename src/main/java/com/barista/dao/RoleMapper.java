@@ -12,7 +12,7 @@ public interface RoleMapper {
 
     int insert(Role record);
 
-    int insertSelective(Role record) throws SQLIntegrityConstraintViolationException;
+    int insertSelective(Role record) ;
 
     Role selectByPrimaryKey(Integer roleId);
 
@@ -24,7 +24,7 @@ public interface RoleMapper {
 
     List<Role> selectAll();
 
-    int updateByPrimaryKeySelective(Role record) throws SQLIntegrityConstraintViolationException;
+    int updateByPrimaryKeySelective(Role record) ;
 
     int updateByPrimaryKey(Role record);
 }

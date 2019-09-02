@@ -176,8 +176,6 @@ public class AdminInfoController {
 
         if (result > 0) {
             return Result.success("增加管理员成功");
-        } else if (result == -1) {
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }
@@ -208,8 +206,6 @@ public class AdminInfoController {
         int result = adminRoleService.updateAdminAndRoles(adminInfo, new ArrayList<>(Arrays.asList(roleIds)));
         if (result > 0) {
             return Result.success("更改管理员信息成功");
-        } else if (result == -1) {
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }

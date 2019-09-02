@@ -9,9 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import java.lang.invoke.MethodHandle;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -35,10 +32,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         String token = (String) request.getSession().getAttribute("token");
         //用户未登录
         if (StringUtils.isEmpty(token) || !token.equals(request.getSession().getAttribute("token"))) {
+            logger.debug("未登录，不可以访问" + request.getRequestURL());
             //这是访问页面时的重定向
             if (request.getRequestURL().toString().contains(".html")) {
                 response.sendRedirect("/page/login.html");
-                logger.debug("未登录，不可以访问" + request.getRequestURL());
             } else {
                 //这是访问接口时返回json的未登录信息
                 response.setContentType("application/json;charset=UTF-8");

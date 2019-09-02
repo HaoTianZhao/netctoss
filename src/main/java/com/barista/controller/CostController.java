@@ -71,8 +71,6 @@ public class CostController {
         int result = costService.insertCost(cost);
         if (result > 0) {
             return Result.success("增加资费成功");
-        } else if (result == -1) {
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }
@@ -115,8 +113,6 @@ public class CostController {
         int result = costService.updateCost(cost);
         if (result > 0) {
             return Result.success("更改资费成功");
-        } else if (result == -1) {
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }

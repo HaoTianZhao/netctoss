@@ -59,13 +59,11 @@ public class RolePrivilegeServiceImpl implements RolePrivilegeService {
 
     @Override
     public int insertRolePrivilege(Role role, List<Integer> privilegeGroupIds) {
-        try {
+
             int result1 = roleMapper.insertSelective(role);
             int result2 = rolePriMapper.insertRolePrivileges(role, privilegeGroupIds);
             return getResult(result1, result2);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+
     }
 
     @Override
@@ -77,14 +75,12 @@ public class RolePrivilegeServiceImpl implements RolePrivilegeService {
 
     @Override
     public int updateRoleAndPrivileges(Role role, List<Integer> privilegeGroupIds) {
-        try {
+
             roleMapper.updateByPrimaryKeySelective(role);
             int result1 = rolePriMapper.deleteByRoleId(role.getRoleId());
             int result2 = rolePriMapper.insertRolePrivileges(role, privilegeGroupIds);
             return getResult(result1, result2);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+
     }
 
     @Override

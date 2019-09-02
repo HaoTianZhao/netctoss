@@ -70,11 +70,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public int insertAccount(Account account) {
-        try {
+
             return accountMapper.insertSelective(account);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+
     }
 
     @Override
@@ -96,11 +94,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public int updateAccount(Account account) {
-        try {
             return accountMapper.updateByPrimaryKeySelective(account);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
     }
 
 }

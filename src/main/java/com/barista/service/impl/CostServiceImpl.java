@@ -43,12 +43,7 @@ public class CostServiceImpl implements CostService {
 
     @Override
     public int insertCost(Cost cost) {
-        try {
-            return costMapper.insertSelective(cost);
-        } catch (
-                SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+        return costMapper.insertSelective(cost);
     }
 
     @Override
@@ -63,10 +58,6 @@ public class CostServiceImpl implements CostService {
 
     @Override
     public int updateCost(Cost cost) {
-        try {
-            return costMapper.updateByPrimaryKeySelective(cost);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+        return costMapper.updateByPrimaryKeySelective(cost);
     }
 }

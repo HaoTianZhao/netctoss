@@ -16,13 +16,13 @@ public interface CostMapper {
 
     List<Cost> selectPagingOrder(@Param("begin") Integer begin, @Param("pageSize") Integer pageSize, @Param("orderBy") String orderBy);
 
-    int insertSelective(Cost record) throws SQLIntegrityConstraintViolationException;
+    int insertSelective(Cost record) ;
 
     int startUsing(Integer costId);
 
     int deleteByPrimaryKey(Integer costId);
 
-    int updateByPrimaryKeySelective(Cost record) throws SQLIntegrityConstraintViolationException;
+    int updateByPrimaryKeySelective(Cost record) ;
 
     Cost selectByPrimaryKey(Integer costId);
 

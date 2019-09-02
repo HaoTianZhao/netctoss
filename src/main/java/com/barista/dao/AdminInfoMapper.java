@@ -13,7 +13,7 @@ public interface AdminInfoMapper {
 
     //    int insert(AdminInfo record);
 
-    int insertSelective(AdminInfo record) throws SQLIntegrityConstraintViolationException;
+    int insertSelective(AdminInfo record) ;
 
     //    AdminInfo selectByPrimaryKey(Integer adminId);
 
@@ -23,7 +23,7 @@ public interface AdminInfoMapper {
 
     List<AdminInfo> selectPaging(@Param("begin") Integer begin, @Param("pageSize") Integer pageSize);
 
-    int updateByPrimaryKeySelective(AdminInfo record) throws SQLIntegrityConstraintViolationException;
+    int updateByPrimaryKeySelective(AdminInfo record) ;
 
     /**
      * 只修改密码，用户名，电话，邮箱
@@ -34,7 +34,7 @@ public interface AdminInfoMapper {
      */
     int updatePartInfoByAdminCodeSelective(AdminInfo record);
 
-    //    int updateByPrimaryKey(AdminInfo record) throws SQLIntegrityConstraintViolationException;
+    //    int updateByPrimaryKey(AdminInfo record) ;
 
     /**
      * 一一对应地重置密码为传入值

@@ -41,13 +41,11 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
     @Override
     public int insertAdminRole(AdminInfo adminInfo, List<Integer> roleIds) {
-        try {
+
             int result1 = adminInfoMapper.insertSelective(adminInfo);
             int result2 = adminRoleMapper.insertAdminRoles(adminInfo.getAdminId(), roleIds);
             return getResult(result1, result2);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+
     }
 
     @Override
@@ -59,14 +57,12 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
     @Override
     public int updateAdminAndRoles(AdminInfo adminInfo, List<Integer> roleIds) {
-        try {
+
             adminInfoMapper.updateByPrimaryKeySelective(adminInfo);
             int result1 = adminRoleMapper.deleteByAdminId(adminInfo.getAdminId());
             int result2 = adminRoleMapper.insertAdminRoles(adminInfo.getAdminId(), roleIds);
             return getResult(result1, result2);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+
     }
 
     @Override

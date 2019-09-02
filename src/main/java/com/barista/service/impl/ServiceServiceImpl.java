@@ -55,12 +55,7 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public int insertService(com.barista.entity.Service service) {
-        try {
-            return serviceMapper.insertSelective(service);
-        } catch (
-                SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+        return serviceMapper.insertSelective(service);
     }
 
     @Override
@@ -90,10 +85,6 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public int updateService(com.barista.entity.Service service) {
-        try {
-            return serviceMapper.updateByPrimaryKeySelective(service);
-        } catch (SQLIntegrityConstraintViolationException e) {
-            return -1;
-        }
+        return serviceMapper.updateByPrimaryKeySelective(service);
     }
 }

@@ -27,7 +27,7 @@ public interface AccountMapper {
             , @Param("accountLoginName") String accountLoginName, @Param("accountStatus") String accountStatus);
 
 
-    int insertSelective(Account record) throws SQLIntegrityConstraintViolationException;
+    int insertSelective(Account record) ;
 
     int startUsing(Integer accountId);
 
@@ -35,7 +35,7 @@ public interface AccountMapper {
 
     int deleteByPrimaryKey(Integer accountId);
 
-    int updateByPrimaryKeySelective(Account record) throws SQLIntegrityConstraintViolationException;
+    int updateByPrimaryKeySelective(Account record) ;
 
 
 }

@@ -47,9 +47,7 @@ public class RoleController {
 
         if (result > 0) {
             return Result.success("增加角色成功");
-        } else if(result == -1){
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
-        }else{
+        } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }
 
@@ -77,11 +75,9 @@ public class RoleController {
         if (ValueUtil.haveNullOrBlack(role.getRoleId(), role.getRoleName(), privilegeGroupIds)) {
             return Result.fail(ResultCode.ILLEGAL_PARAM);
         }
-        int result = rolePrivilegeService.updateRoleAndPrivileges(role,new ArrayList<>(Arrays.asList(privilegeGroupIds)));
+        int result = rolePrivilegeService.updateRoleAndPrivileges(role, new ArrayList<>(Arrays.asList(privilegeGroupIds)));
         if (result > 0) {
             return Result.success("更改角色成功");
-        } else if(result == -1){
-            return Result.fail(ResultCode.DUPLICATE_INDEX);
         } else {
             return Result.fail(ResultCode.SERVER_ERROR);
         }
