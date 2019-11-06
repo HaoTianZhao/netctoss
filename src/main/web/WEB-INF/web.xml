@@ -8,16 +8,34 @@
         <welcome-file>/login.html</welcome-file>
     </welcome-file-list>
 
+
+    <!--1.应用启动的时候创建父容器,读取context-param配置,进行参数初始化配置,获取配置文件-->
+    <!--2.创建核心控制器，并且读取init-param配置的配置文件,创建子容器,spring会自动将父容器注入给子容器-->
+
+    <!--监听web容器启动就加载ioc容器-->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     <!--配置全局参数，让监听器能够识别到spring的配置文件所在-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:application*.xml</param-value>
     </context-param>
 
-    <!--监听web容器启动就加载ioc容器-->
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-    </listener>
+    <!--
+        创建默认web容器规则:读取配置文件方式创建web容器
+        修改contextClass设置为读取配置文件方式创建Spring容器
+        <context-param>
+            <param-name>contextClass</param-name>
+            <param-value>org.springframework.context.annotation.AnnotationConfigApplicationContext
+            </param-value>
+        </context-param>
+        <context-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>com.barista.config.WebMvcConfig</param-value>
+        </context-param>
+    -->
+
 
     <!--监听ServletContext，结束web程序时关闭资源-->
     <!--<listener>-->
@@ -37,7 +55,6 @@
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
         </init-param>
-
     </filter>
     <filter-mapping>
         <filter-name>characterEncoding</filter-name>
@@ -56,7 +73,6 @@
         <!--容器启动加载servlet-->
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <!--拦截所有请求-->

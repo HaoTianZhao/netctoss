@@ -8,6 +8,9 @@
     <context id="MySql" defaultModelType="flat">
         <!-- 生成的POJO实现java.io.Serializable接口 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <!--覆盖而不是追加生成XML文件,要求1.3.7版本-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
 
         <!--注释-->
         <commentGenerator>
@@ -55,9 +58,9 @@
             <property name="modelOnly" value="false"/>
 
             <!--将时间转换为LocalDateTime-->
-            <!--<columnOverride column="birthday" property="birthday"-->
-            <!--typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"-->
-            <!--jdbcType="OTHER" javaType="java.time.LocalDateTime"/>-->
+            <columnOverride column="birthday" property="birthday"
+            typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"
+            jdbcType="OTHER" javaType="java.time.LocalDateTime"/>
         </table>
 
         <!--<table tableName="admin_info" domainObjectName="AdminInfo"-->
