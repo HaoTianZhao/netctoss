@@ -1,7 +1,7 @@
 package com.barista.typeHandler;
 
-import com.sun.deploy.util.StringUtils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedJdbcTypes;
