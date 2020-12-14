@@ -2,6 +2,7 @@ package com.barista.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Bill implements Serializable {
     private Integer billId;
@@ -16,16 +17,8 @@ public class Bill implements Serializable {
 
     private String payState;
 
-    private static final long serialVersionUID = 1L;
+    private Date date;
 
-    public Bill(Integer billId, Integer accountId, String billMonth, BigDecimal cost, String paymentMode, String payState) {
-        this.billId = billId;
-        this.accountId = accountId;
-        this.billMonth = billMonth;
-        this.cost = cost;
-        this.paymentMode = paymentMode;
-        this.payState = payState;
-    }
 
     public Bill() {
         super();
@@ -77,5 +70,13 @@ public class Bill implements Serializable {
 
     public void setPayState(String payState) {
         this.payState = payState;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
