@@ -49,6 +49,7 @@ public class OracleBigintResolver extends JavaTypeResolverDefaultImpl {
     protected Map<Integer, JavaTypeResolverDefaultImpl.JdbcTypeInformation> typeMap = new HashMap();
 
     public OracleBigintResolver() {
+
         this.typeMap.put(2003, new JavaTypeResolverDefaultImpl.JdbcTypeInformation("ARRAY", new FullyQualifiedJavaType(Object.class.getName())));
         this.typeMap.put(-5, new JavaTypeResolverDefaultImpl.JdbcTypeInformation("BIGINT", new FullyQualifiedJavaType(Long.class.getName())));
         this.typeMap.put(-2, new JavaTypeResolverDefaultImpl.JdbcTypeInformation("BINARY", new FullyQualifiedJavaType("byte[]")));
@@ -94,7 +95,7 @@ public class OracleBigintResolver extends JavaTypeResolverDefaultImpl {
     @Override
     public FullyQualifiedJavaType calculateJavaType(IntrospectedColumn introspectedColumn) {
         FullyQualifiedJavaType answer = null;
-        JavaTypeResolverDefaultImpl.JdbcTypeInformation jdbcTypeInformation = (JavaTypeResolverDefaultImpl.JdbcTypeInformation)this.typeMap.get(introspectedColumn.getJdbcType());
+        JavaTypeResolverDefaultImpl.JdbcTypeInformation jdbcTypeInformation = (JavaTypeResolverDefaultImpl.JdbcTypeInformation) this.typeMap.get(introspectedColumn.getJdbcType());
         if (jdbcTypeInformation != null) {
             answer = jdbcTypeInformation.getFullyQualifiedJavaType();
             answer = this.overrideDefaultType(introspectedColumn, answer);
@@ -106,7 +107,7 @@ public class OracleBigintResolver extends JavaTypeResolverDefaultImpl {
     @Override
     protected FullyQualifiedJavaType overrideDefaultType(IntrospectedColumn column, FullyQualifiedJavaType defaultType) {
         FullyQualifiedJavaType answer = defaultType;
-        switch(column.getJdbcType()) {
+        switch (column.getJdbcType()) {
             case -7:
                 answer = this.calculateBitReplacement(column, defaultType);
                 break;
@@ -134,10 +135,12 @@ public class OracleBigintResolver extends JavaTypeResolverDefaultImpl {
     protected FullyQualifiedJavaType calculateBigDecimalReplacement(IntrospectedColumn column, FullyQualifiedJavaType defaultType) {
         FullyQualifiedJavaType answer;
         if (column.getScale() <= 0 && column.getLength() <= 20 && !this.forceBigDecimals) {
-            if (column.getLength() > 9) {
+            if (column.getLength() > 11) {
                 answer = new FullyQualifiedJavaType(Long.class.getName());
             } else if (column.getLength() > 4) {
                 answer = new FullyQualifiedJavaType(Integer.class.getName());
+            } else if (column.getScale() < 0) {
+                answer = new FullyQualifiedJavaType(BigDecimal.class.getName());
             } else {
                 answer = new FullyQualifiedJavaType(Short.class.getName());
             }
@@ -151,7 +154,7 @@ public class OracleBigintResolver extends JavaTypeResolverDefaultImpl {
     @Override
     public String calculateJdbcTypeName(IntrospectedColumn introspectedColumn) {
         String answer = null;
-        JavaTypeResolverDefaultImpl.JdbcTypeInformation jdbcTypeInformation = (JavaTypeResolverDefaultImpl.JdbcTypeInformation)this.typeMap.get(introspectedColumn.getJdbcType());
+        JavaTypeResolverDefaultImpl.JdbcTypeInformation jdbcTypeInformation = (JavaTypeResolverDefaultImpl.JdbcTypeInformation) this.typeMap.get(introspectedColumn.getJdbcType());
         if (jdbcTypeInformation != null) {
             answer = jdbcTypeInformation.getJdbcTypeName();
         }

@@ -24,6 +24,8 @@ package com.drools;
 
 import com.barista.entity.Bill;
 import com.barista.entity.Cost;
+import com.zhilingsd.asset.manage.decisionengine.common.bo.BillVariateBo;
+import com.zhilingsd.asset.manage.decisionengine.common.bo.DroolsResult;
 
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -49,10 +51,13 @@ public class RulesHello {
         KieContainer kieContainer = kieServices.getKieClasspathContainer();
         KieSession kieSession = kieContainer.newKieSession("testhelloworld");
 
+        kieSession.insert(new BillVariateBo());
+        kieSession.insert(new DroolsResult());
+
         Bill bill = new Bill();
         bill.setDate(new Date());
         bill.setPayState("已还款");
-        bill.setCost(new BigDecimal(30.0));
+        bill.setCost(new BigDecimal(1000D));
         System.out.println("输出代码中的引用对象" + bill);
         FactHandle insert = kieSession.insert(bill);
 
