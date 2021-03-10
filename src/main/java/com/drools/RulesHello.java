@@ -51,23 +51,17 @@ public class RulesHello {
         KieContainer kieContainer = kieServices.getKieClasspathContainer();
         KieSession kieSession = kieContainer.newKieSession("testhelloworld");
 
-        kieSession.insert(new BillVariateBo());
-        kieSession.insert(new DroolsResult());
-
-        Bill bill = new Bill();
-        bill.setDate(new Date());
-        bill.setPayState("已还款");
-        bill.setCost(new BigDecimal(1000D));
-        System.out.println("输出代码中的引用对象" + bill);
-        FactHandle insert = kieSession.insert(bill);
-
-        Cost cost = new Cost();
-        kieSession.insert(cost);
+        BillVariateBo billVariateBo = new BillVariateBo();
+        billVariateBo.setOverdueMoney(null);
+        billVariateBo.setOverdueStage("M1");
+        billVariateBo.setOutHandType("Q2");
+        kieSession.insert(billVariateBo);
+        DroolsResult droolsResult = new DroolsResult();
+        kieSession.insert(droolsResult);
 
         int count = kieSession.fireAllRules();
         System.out.println("执行规则数:" + count);
-        System.out.println("执行完规则后的cost值" + bill.getCost().toString());
         kieSession.dispose();
-        System.out.println("执行完规则后的costName值" + cost.getCostName());
+        System.out.println("执行完规则后的queueNumber和billTag, " + droolsResult.getQueueNumber() + ", " + droolsResult.getBillTag());
     }
 }

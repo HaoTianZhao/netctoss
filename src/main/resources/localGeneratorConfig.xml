@@ -68,6 +68,7 @@
 
         <table tableName="qi_rule_sentence_group">
             <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
+            <!--<columnOverride column="strategy_order" property="order"/>-->
         </table>
         <table tableName="qi_rule_sentence">
         </table>

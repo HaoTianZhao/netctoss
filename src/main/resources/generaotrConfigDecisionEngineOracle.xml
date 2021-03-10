@@ -8,8 +8,8 @@
     <context id="default" defaultModelType="flat">
         <!--前后生成反引号-->
         <property name="autoDelimitKeywords" value="true"/>
-        <property name="beginningDelimiter" value="'"/>
-        <property name="endingDelimiter" value="'"/>
+        <property name="beginningDelimiter" value='"'/>
+        <property name="endingDelimiter" value='"'/>
 
         <!-- 生成的POJO实现java.io.Serializable接口 -->
         <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>-->
@@ -26,18 +26,26 @@
         </commentGenerator>
 
         <!-- 数据库连接 本地-->
-        <!--<jdbcConnection-->
-        <!--driverClass="com.mysql.cj.jdbc.Driver"-->
-        <!--connectionURL="jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8-->
-        <!--&amp;useSSL=false&amp;nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true"-->
-        <!--userId="root"-->
-        <!--password="123123"/>-->
+        <!--        <jdbcConnection
+                    driverClass="com.mysql.cj.jdbc.Driver"
+                    connectionURL="jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8
+                &amp;useSSL=false&amp;nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true"
+                    userId="root"
+                    password="123123"/>
+
+                <jdbcConnection
+                    driverClass="com.mysql.cj.jdbc.Driver"
+                    connectionURL="jdbc:mysql://192.168.18.225:3313/asset_decisionengine?serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8
+                &amp;useSSL=false&amp;nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true"
+                    userId="rw"
+                    password="zlsdRW@2019"/>-->
         <!--数据库连接 开发环境-->
         <jdbcConnection
             driverClass="oracle.jdbc.driver.OracleDriver"
-            connectionURL="jdbc:oracle:thin:@192.168.18.231:1521/helowin"
-            userId="dev"
-            password="zlsdDBA@2019"/>
+            connectionURL="jdbc:oracle:thin:@192.168.18.231:1522/zlsd"
+            userId="asset"
+            password="Asset.2020">
+        </jdbcConnection>
 
         <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和NUMERIC 类型解析为java.math.BigDecimal -->
         <javaTypeResolver type="com.mybatisGenerator.resolver.OracleBigintResolver"/>
@@ -66,11 +74,12 @@
 
         <!--table标签可以有多个，至少一个，tableName指定表名，可以使用_和%通配符, tableName="%"生成所有表-->
 
-        <table tableName="ST_allocation_engine" domainObjectName="AllocationEngine"></table>
-        <table tableName="ST_allocation_flow" domainObjectName="AllocationFlow"></table>
+        <table tableName="ST_ALLOCATION_ENGINE" domainObjectName="AllocationEngine">
+        </table>
+        <table tableName="ST_DECISION_RULE" domainObjectName="DecisionRule"></table>
+        <!--<table tableName="ST_allocation_flow_del" domainObjectName="AllocationFlow"></table>-->
         <table tableName="ST_strategy_condition" domainObjectName="StrategyCondition"></table>
         <table tableName="ST_strategy_condition_rule" domainObjectName="StrategyConditionRule"></table>
-        <table tableName="ST_decision_rule" domainObjectName="DecisionRule"></table>
         <table tableName="ST_strategy_queue" domainObjectName="StrategyQueue"></table>
         <table tableName="ST_strategy_call_allocation" domainObjectName="StrategyCallAllocation"></table>
         <table tableName="ST_strategy_call_package" domainObjectName="StrategyCallPackage"></table>
@@ -78,10 +87,12 @@
         <table tableName="ST_strategy_group_weight" domainObjectName="StrategyGroupWeight"></table>
         <table tableName="ST_strategy_justice" domainObjectName="StrategyJustice"></table>
         <table tableName="ST_strategy_sms" domainObjectName="StrategySms"></table>
-        <table tableName="ST_strategy_outsource" domainObjectName="StrategyOutsource"></table>
+        <table tableName="ST_strategy_mail" domainObjectName="StrategyMail"></table>
+        <table tableName="ST_strategy_outsource" domainObjectName="StrategyOutsource">
+        </table>
         <table tableName="ST_strategy_outsource_weight" domainObjectName="StrategyOutsourceWeight"></table>
         <table tableName="ST_strategy_queue_rel" domainObjectName="StrategyQueueRel"></table>
-        <table tableName="ST_variate_factor" domainObjectName="VariateFactor"></table>
+        <table tableName="ST_strategy_task" domainObjectName="StrategyTask"></table>
         <table tableName="ST_task_call" domainObjectName="TaskCall"></table>
         <table tableName="ST_task_allocation" domainObjectName="TaskAllocation"></table>
         <table tableName="ST_task_first_call" domainObjectName="TaskFirstCall"></table>
@@ -91,28 +102,31 @@
         <table tableName="ST_task_second_call" domainObjectName="TaskSecondCall"></table>
         <table tableName="ST_task_sms" domainObjectName="TaskSms"></table>
         <table tableName="ST_task_group_rel" domainObjectName="TaskGroupRel"></table>
-        <table tableName="ST_strategy_task" domainObjectName="StrategyTask"></table>
         <table tableName="ST_task_condition_rule" domainObjectName="TaskConditionRule"></table>
+        <table tableName="ST_variate_factor" domainObjectName="VariateFactor"></table>
 
 
-        <!--<table tableName="qi_common_rule_score_rules">-->
-        <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
-        <!--</table>-->
-        <!--是否只生成POJO对象-->
-        <!--<property name="modelOnly" value="true"/>-->
+        <!--
+                <table tableName="qi_common_rule_score_rules">
+                    &lt;!&ndash;覆盖字段命名&ndash;&gt;
+                    <columnOverride column="strategy_type" property="type"/>
+                    <generatedKey column="id" sqlStatement="JDBC"/>
+                    &lt;!&ndash;是否只生成POJO对象&ndash;&gt;
+                    <property name="modelOnly" value="true"/>
 
-        <!--<ignoreColumn column="srctb" delimitedColumnName="false"/>-->
-        <!--<ignoreColumn column="srctbpk" delimitedColumnName="false"/>-->
+                    <ignoreColumn column="srctb" delimitedColumnName="false"/>
+                    <ignoreColumn column="srctbpk" delimitedColumnName="false"/>
 
-        <!--将时间转换为LocalDateTime-->
-        <!--<columnOverride column="birthday" property="birthday"-->
-        <!--typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"-->
-        <!--jdbcType="OTHER" javaType="java.time.LocalDateTime"/>-->
-        <!--</table>-->
-        <!--<table tableName="bill_phone_record_info_back" domainObjectName="BillPhoneRecordInfoBack">-->
-        <!--</table>-->
-        <!--<table tableName="bill_visit_record_info_back" domainObjectName="BillVisitRecordInfoBack">-->
-        <!--</table>-->
+                    &lt;!&ndash;将时间转换为LocalDateTime&ndash;&gt;
+                    <columnOverride column="birthday" property="birthday"
+                                    typeHandler="org.apache.ibatis.type.LocalDateTimeTypeHandler"
+                                    jdbcType="OTHER" javaType="java.time.LocalDateTime"/>
+                </table>
+                <table tableName="bill_phone_record_info_back" domainObjectName="BillPhoneRecordInfoBack">
+                </table>
+                <table tableName="bill_visit_record_info_back" domainObjectName="BillVisitRecordInfoBack">
+                </table>
+        -->
 
         <!--
                 <table tableName="admin_info" domainObjectName="AdminInfo"

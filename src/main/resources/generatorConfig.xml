@@ -5,11 +5,11 @@
 <generatorConfiguration>
 
     <!-- defaultModelType="flat" 设置复合主键时不单独为主键创建实体 -->
-    <context id="default" defaultModelType="flat">
+    <context id="MySql" defaultModelType="flat">
         <!--前后生成反引号-->
         <property name="autoDelimitKeywords" value="true"/>
-        <property name="beginningDelimiter" value='"'/>
-        <property name="endingDelimiter" value='"'/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
 
         <!-- 生成的POJO实现java.io.Serializable接口 -->
         <!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>-->
@@ -34,20 +34,19 @@
         <!--password="123123"/>-->
         <!--数据库连接 开发环境-->
         <jdbcConnection
-            driverClass="oracle.jdbc.driver.OracleDriver"
-            connectionURL="jdbc:oracle:thin:@192.168.18.231:1521/helowin"
-            userId="dev"
-            password="zlsdDBA@2019">
-        </jdbcConnection>
+            driverClass="com.mysql.cj.jdbc.Driver"
+            connectionURL="jdbc:mysql://192.168.18.231:3313/asset_datacenter?serverTimezone=Asia/Shanghai&amp;characterEncoding=utf8
+&amp;useSSL=false&amp;nullNamePatternMatchesAll=true&amp;nullCatalogMeansCurrent=true"
+            userId="rw"
+            password="zlsdRW@2019"/>
 
         <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和NUMERIC 类型解析为java.math.BigDecimal -->
-        <javaTypeResolver type="com.mybatisGenerator.resolver.OracleBigintResolver"/>
-        <!--<javaTypeResolver>-->
-        <!--<property name="forceBigDecimals" value="true"/>-->
-        <!--</javaTypeResolver>-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
 
         <!-- 生成POJO对象，并将类放到com.barista.entity包下 -->
-        <javaModelGenerator targetPackage="com.zhilingsd.asset.manage.decisionengine.dal.model"
+        <javaModelGenerator targetPackage="com.zhilingsd.asset.data.center.dal.model"
                             targetProject="src/main/java">
             <!-- (会影响mapper的resultMap标签.从id,result形式,变为constructor,arg形式) 是否对model添加 构造函数 -->
             <property name="constructorBased" value="false"/>
@@ -62,14 +61,17 @@
              type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
              type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator targetPackage="com.zhilingsd.asset.manage.decisionengine.dal.mapper" targetProject="src/main/java"
+        <javaClientGenerator targetPackage="com.zhilingsd.asset.data.center.dal.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"></javaClientGenerator>
 
         <!--table标签可以有多个，至少一个，tableName指定表名，可以使用_和%通配符, tableName="%"生成所有表-->
+        <table tableName="DC_BILL_INFO">
+        </table>
 
-        <!--<table schema="ASSET" tableName="ST_DECISION_RULE" domainObjectName="DecisionRule"></table>-->
-        <table tableName="ST_allocation_engine" domainObjectName="AllocationEngine"></table>
-        <!--<table tableName="ST_allocation_flow" domainObjectName="AllocationFlow"></table>-->
+        <!--<table tableName="ST_ALLOCATION_ENGINE" domainObjectName="AllocationEngine">-->
+        <!--</table>-->
+        <!--<table tableName="ST_DECISION_RULE" domainObjectName="DecisionRule"></table>-->
+        <!--<table tableName="ST_allocation_flow_del" domainObjectName="AllocationFlow"></table>-->
         <!--<table tableName="ST_strategy_condition" domainObjectName="StrategyCondition"></table>-->
         <!--<table tableName="ST_strategy_condition_rule" domainObjectName="StrategyConditionRule"></table>-->
         <!--<table tableName="ST_strategy_queue" domainObjectName="StrategyQueue"></table>-->
@@ -79,10 +81,12 @@
         <!--<table tableName="ST_strategy_group_weight" domainObjectName="StrategyGroupWeight"></table>-->
         <!--<table tableName="ST_strategy_justice" domainObjectName="StrategyJustice"></table>-->
         <!--<table tableName="ST_strategy_sms" domainObjectName="StrategySms"></table>-->
-        <!--<table tableName="ST_strategy_outsource" domainObjectName="StrategyOutsource"></table>-->
+        <!--<table tableName="ST_strategy_mail" domainObjectName="StrategyMail"></table>-->
+        <!--<table tableName="ST_strategy_outsource" domainObjectName="StrategyOutsource">-->
+        <!--</table>-->
         <!--<table tableName="ST_strategy_outsource_weight" domainObjectName="StrategyOutsourceWeight"></table>-->
         <!--<table tableName="ST_strategy_queue_rel" domainObjectName="StrategyQueueRel"></table>-->
-        <!--<table tableName="ST_variate_factor" domainObjectName="VariateFactor"></table>-->
+        <!--<table tableName="ST_strategy_task" domainObjectName="StrategyTask"></table>-->
         <!--<table tableName="ST_task_call" domainObjectName="TaskCall"></table>-->
         <!--<table tableName="ST_task_allocation" domainObjectName="TaskAllocation"></table>-->
         <!--<table tableName="ST_task_first_call" domainObjectName="TaskFirstCall"></table>-->
@@ -92,9 +96,8 @@
         <!--<table tableName="ST_task_second_call" domainObjectName="TaskSecondCall"></table>-->
         <!--<table tableName="ST_task_sms" domainObjectName="TaskSms"></table>-->
         <!--<table tableName="ST_task_group_rel" domainObjectName="TaskGroupRel"></table>-->
-        <!--<table tableName="ST_strategy_task" domainObjectName="StrategyTask"></table>-->
         <!--<table tableName="ST_task_condition_rule" domainObjectName="TaskConditionRule"></table>-->
-
+        <!--<table tableName="ST_variate_factor" domainObjectName="VariateFactor"></table>-->
 
         <!--<table tableName="qi_common_rule_score_rules">-->
         <!--<generatedKey column="id" sqlStatement="JDBC"/>-->
