@@ -1,4 +1,4 @@
-package drools.rules
+package drools.rules.rulesHello
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
@@ -11,30 +11,30 @@ import com.zhilingsd.asset.manage.decisionengine.common.bo.BillVariateBo;
     rule "name1"
     activation-group "group"
         when
-            $b:BillVariateBo(            (overdueMoney > 500 || generalCredit <= 50000) &&             (overdueDays > 18)            )
+            $b:BillVariateBo(            (("20" memberOf tag && "23" memberOf tag))            )
             $d:DroolsResult()
         then
-            $d.setQueueNumber("逾期天使大于18");
-            $d.setBillTag("逾期天数较长");
+            $d.setQueueNumber("DL001");
+            $d.setBillTag("小额贷款");
         end
 
     rule "name2"
     activation-group "group"
         when
-            $b:BillVariateBo(            (overdueMoney > 500 || generalCredit <= 50000) &&             (overdueDays <= 18)            )
+            $b:BillVariateBo(            (("20" not memberOf tag  ||  "23" not memberOf tag)) &&             ("13" not memberOf tag || "23" not memberOf tag)            )
             $d:DroolsResult()
         then
-            $d.setQueueNumber("逾期天数小于18");
-            $d.setBillTag("逾期天数较短");
+            $d.setQueueNumber("feisusong");
+            $d.setBillTag("feisusong");
         end
 
     rule "name3"
     activation-group "group"
         when
-            $b:BillVariateBo(            (overdueMoney <= 500 && generalCredit > 50000)            )
+            $b:BillVariateBo(            (("20" not memberOf tag  ||  "23" not memberOf tag)) &&             ("13" memberOf tag && "23" memberOf tag)            )
             $d:DroolsResult()
         then
-            $d.setQueueNumber("逾期天数小于500");
-            $d.setBillTag("小金额");
+            $d.setQueueNumber("susong");
+            $d.setBillTag("susong");
         end
 

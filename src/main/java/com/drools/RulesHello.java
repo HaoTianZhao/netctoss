@@ -52,16 +52,18 @@ public class RulesHello {
         KieSession kieSession = kieContainer.newKieSession("testhelloworld");
 
         BillVariateBo billVariateBo = new BillVariateBo();
-        billVariateBo.setOverdueMoney(null);
         billVariateBo.setOverdueStage("M1");
         billVariateBo.setOutHandType("Q2");
+        billVariateBo.setOverdueDays(20);
+        billVariateBo.setOverdueMoney(new BigDecimal("2000"));
+        billVariateBo.setTag(new String[]{"20", "23", "24"});
         kieSession.insert(billVariateBo);
         DroolsResult droolsResult = new DroolsResult();
         kieSession.insert(droolsResult);
 
         int count = kieSession.fireAllRules();
         System.out.println("执行规则数:" + count);
-        kieSession.dispose();
         System.out.println("执行完规则后的queueNumber和billTag, " + droolsResult.getQueueNumber() + ", " + droolsResult.getBillTag());
+        kieSession.dispose();
     }
 }

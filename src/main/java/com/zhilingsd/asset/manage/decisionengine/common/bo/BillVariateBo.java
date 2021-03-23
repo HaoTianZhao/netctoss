@@ -40,75 +40,85 @@ public class BillVariateBo {
     private Long id;
     private String productPrice;
     private String highProductType;
-    
+
     private String billSource;
-    
+
     private Integer lostContactTimes;
-    
+
     private BigDecimal minimumPayment;
-    
+
     private String outHandType;
-    
+
     private Integer billDay;
-    
+
     private Integer repayDay;
-    
+
     private String historyLeastCallResult;
-    
+
     private String historyBestCollectionResult;
-    
+
     private String collectionStatus;
-    
+
     private String outStatus;
-    
+
     private String outType;
-    
+
     private String leastCallResult;
-    
+
     private String bestCollectionResult;
-    
+
     private String currPromiseRepay;
-    
+
     private String isPromiseRepayDay;
-    
+
     private String inCollectionReason;
-    
+
     private String repayCustomer;
 
-    
+
     private String customerNo;
-    
+
     private String historyHighOverdueStage;
-    
+
     private String customType;
-    
+
     private String isFirstOverdue;
-    
+
     private String overdueStage;
-    
+
     private BigDecimal generalCreditUseRate;
-    
+
     private BigDecimal generalCredit;
-    
+
     private BigDecimal totalDebt;
-    
+
     private BigDecimal overdueMoney;
-    
+
     private String registeredProvince;
-    
+
     private String registeredCity;
-    
+
     private String liveProvince;
-    
+
     private String liveCity;
-    
+
     private Integer historyHighOverdueDays;
-    
+
     private Integer overdueDays;
-    
+
     private String collectionRiskLevel;
-    
+
     private String telephoneProvider;
+
+    private String[] tag;
+
+    public String[] getTag() {
+        return tag;
+    }
+
+    public void setTag(String[] tag) {
+        this.tag = tag;
+    }
 
     public Long getBillId() {
         return billId;
